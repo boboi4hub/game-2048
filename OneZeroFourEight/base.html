@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="./base.js"></script>
+        <style>
+            main {
+                margin: 0 auto;
+                width: 200px;
+                height: 200px;
+            }
+
+            #board {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                /* justify-items: left; */
+                grid-gap: 2px;
+            }
+
+            #board div {
+                width: 50px;
+                height: 50px;
+                border: 1px solid blue;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div id="board">
+                <div id="00"></div>
+                <div id="01"></div>
+                <div id="02"></div>
+                <div id="03"></div>
+
+                <div id="10"></div>
+                <div id="11"></div>
+                <div id="12"></div>
+                <div id="13"></div>
+
+                <div id="20"></div>
+                <div id="21"></div>
+                <div id="22"></div>
+                <div id="23"></div>
+
+                <div id="30"></div>
+                <div id="31"></div>
+                <div id="32"></div>
+                <div id="33"></div>
+            </div>
+        </main>
+        <script>
+            const SIZE = 4;
+            window.state = init(SIZE);
+
+            function render(state) {
+                for (let i = 0; i < SIZE; i++) {
+                    for (let j = 0; j < SIZE; j++) {
+                        const id = i.toString() + j.toString();
+
+                        const el = document.getElementById(id);
+                        el.textContent = state[i][j];
+                        el.setAttribute("data-value", el.textContent);
+                    }
+                }
+            }
+            render(window.state)
+
+            const element = document;
+
+            element.addEventListener("keyup", function (event) {
+                console.log(event);
+                if ((event.key === "ArrowLeft")) {
+                    window.state = left(window.state);
+                    
+                }
+                else if ((event.key === "ArrowUp")) {
+                    window.state = up(window.state);
+                    
+                }
+                else if ((event.key === "ArrowRight")) {
+                    window.state = right(window.state);
+                    
+                }
+                else if ((event.key === "ArrowDown")) {
+                    window.state = down(window.state);
+                    
+                }
+                render(window.state)
+            });
+        </script>
+    </body>
+</html>
