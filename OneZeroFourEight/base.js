@@ -85,6 +85,17 @@ function emptyCoordinates(xss) {
   return result;
 }
 
+function sameMatrixes(xss, yss) {
+  for (let i = 0; i < xss.length; i++) {
+    for (let j = 0; j < xss[0].length; j++) {
+      if (xss[i][j] !== yss[i][j]) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 const API = {
   up: xss => {
     const r = rotateMatrixRight(rotateMatrixRight(rotateMatrixRight(xss)));

@@ -83,13 +83,20 @@
 
         if (api) {
           const modified = api(window.state);
-          const addRandom = API.addRandom(modified);
-          if (!addRandom) {
-            console.log('End Game');
+
+          if (sameMatrixes(modified, window.state)) {
+            if (emptyCoordinates(modified).length === 0) {
+              alert('End Game');
+            }
           } else {
-            window.state = addRandom;
+            const addRandom = API.addRandom(modified);
+            if (!addRandom) {
+              alert('End Game');
+            } else {
+              window.state = addRandom;
+            }
+            render(window.state);
           }
-          render(window.state);
         }
       });
 
