@@ -96,6 +96,8 @@ function sameMatrixes(xss, yss) {
   return true;
 }
 
+// PUBLIC API
+
 const API = {
   up: xss => {
     const r = rotateMatrixRight(rotateMatrixRight(rotateMatrixRight(xss)));
