@@ -74,11 +74,9 @@
 
         if (handler) {
           const newState = handler(window.state)
+          const sameMatrixes = API.sameMatrixes(newState, window.state)
 
-          if (
-            emptyCoordinates(newState)?.length === 0 &&
-            API.sameMatrixes(newState, window.state)
-          ) {
+          if (emptyCoordinates(newState)?.length === 0 && sameMatrixes) {
             // We suspect this is the end of game
             if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
               if (!checkEvent(window.state, API.up)) {
@@ -92,11 +90,11 @@
               render(window.state)
             }
           } else {
-            const res = API.addRandom(newState)
-
-            if (!res) {
-              alert('End Game')
-            } else {
+            if (!sameMatrixes) {
+              const res = API.addRandom(newState)
+              if (!res) {
+                alert('End Game')
+              }
               window.state = res
             }
 
