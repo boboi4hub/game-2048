@@ -69,6 +69,14 @@
         return !API.sameMatrixes(fn(xss), xss)
       }
 
+      function checkEndGame(event, key1, key2, fn) {
+        if (event.key === key1 || event.key === key2) {
+          if (!checkEvent(window.state, fn)) {
+            alert('End Game')
+          }
+        }
+      }
+
       document.addEventListener('keyup', event => {
         const handler = eventMap[event.key]
 
@@ -78,28 +86,17 @@
 
           if (emptyCoordinates(newState)?.length === 0 && sameMatrixes) {
             // We suspect this is the end of game
-            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-              if (!checkEvent(window.state, API.up)) {
-                alert('End Game')
-              }
-            } else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-              if (!checkEvent(window.state, APU.right)) {
-                alert('End Game')
-              }
-            } else {
-              render(window.state)
+            checkEndGame(event, 'ArrowLeft', 'ArrowRight', API.up)
+            checkEndGame(event, 'ArrowUp', 'ArrowDown', API.right)
+          } else if (!sameMatrixes) {
+            const res = API.addRandom(newState)
+            if (!res) {
+              alert('End Game')
             }
-          } else {
-            if (!sameMatrixes) {
-              const res = API.addRandom(newState)
-              if (!res) {
-                alert('End Game')
-              }
-              window.state = res
-            }
-
-            render(window.state)
+            window.state = res
           }
+
+          render(window.state)
         }
       })
 
