@@ -1,15 +1,17 @@
 /// UTILS
 
-function merge(x1, x2) {
+/// Merge two neighboring cells into one
+function mergeTwoElements(x1, x2) {
   return x1 === x2 ? x1 * 2 : x1;
 }
 
+/// Merge all the array element by element. It may free some cells
 function mergeArray(xs) {
   const filtered = xs.filter(n => n != 0);
   const result = [];
 
   for (let i = 0; i < filtered.length; i++) {
-    const m = merge(filtered[i], filtered[i + 1]);
+    const m = mergeTwoElements(filtered[i], filtered[i + 1]);
     result.push(m);
     if (m !== filtered[i]) {
       i++;
@@ -19,10 +21,11 @@ function mergeArray(xs) {
   return [...result, ...[0, 0, 0, 0]].slice(0, xs.length);
 }
 
+/// Merge all the matrix
 function mergeMatrix(xss) {
   const result = [];
-  for (let i = 0; i < xss.length; i++) {
-    result.push(mergeArray(xss[i]));
+  for (const element of xss) {
+    result.push(mergeArray(element));
   }
   return result;
 }
@@ -37,7 +40,7 @@ function copyMatrix(matrix) {
 
   return copiedMatrix;
 }
-
+/// Performs rotation on the right
 function rotateMatrixRight(matrix) {
   const result = copyMatrix(matrix);
   const n = matrix.length;
@@ -54,7 +57,7 @@ function rotateMatrixRight(matrix) {
 
   // Reverse each row
   for (let i = 0; i < n; i++) {
-    result[i] = result[i].reverse();
+    result[i] = result[i].toReversed();
   }
 
   return result;
@@ -104,19 +107,23 @@ const API = {
     const result = mergeMatrix(r);
     return rotateMatrixRight(result);
   },
+
   down: xss => {
     const r = rotateMatrixRight(xss);
     const result = mergeMatrix(r);
     return rotateMatrixRight(rotateMatrixRight(rotateMatrixRight(result)));
   },
+  
   left: xss => {
     return mergeMatrix(xss);
   },
+
   right: xss => {
     const r = rotateMatrixRight(rotateMatrixRight(xss));
     const result = mergeMatrix(r);
     return rotateMatrixRight(rotateMatrixRight(result));
   },
+
   init: n => {
     const rand = () => getRandomInt(0, n * n - 1);
     let x = [rand(), rand()];
@@ -140,6 +147,7 @@ const API = {
 
     return result;
   },
+  
   addRandom: xss => {
     const copy = copyMatrix(xss);
     const emptyCells = emptyCoordinates(copy);
