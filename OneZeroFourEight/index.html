@@ -65,14 +65,8 @@
         }
       }
 
-      function checkEventUp(xss) {
-        const newState = API.up(xss)
-        return !API.sameMatrixes(newState, xss)
-      }
-
-      function checkEventRight(xss) {
-        const newState = API.right(xss)
-        return !API.sameMatrixes(newState, xss)
+      function checkEvent(xss, fn) {
+        return !API.sameMatrixes(fn(xss), xss)
       }
 
       document.addEventListener('keyup', event => {
@@ -87,11 +81,11 @@
           ) {
             // We suspect this is the end of game
             if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-              if (!checkEventUp(window.state)) {
+              if (!checkEvent(window.state, API.up)) {
                 alert('End Game')
               }
             } else if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-              if (!checkEventRight(window.state)) {
+              if (!checkEvent(window.state, APU.right)) {
                 alert('End Game')
               }
             } else {
