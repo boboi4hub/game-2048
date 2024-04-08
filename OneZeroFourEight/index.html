@@ -1,106 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2048 Game</title>
-    <link rel="stylesheet" type="text/css" rel="noopener" href="styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:ital@0;1&display=swap"
-      rel="stylesheet" />
-    <script src="./index.js"></script>
-  </head>
-  <body>
-    <main>
-      <div class="above-game">
-        <button onClick="window.location.reload();">New Game</button>
-      </div>
-      <div id="board">
-        <div id="00"></div>
-        <div id="01"></div>
-        <div id="02"></div>
-        <div id="03"></div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>2048 Game</title>
+        <link
+            rel="stylesheet"
+            type="text/css"
+            rel="noopener"
+            href="styles.css"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Rubik:ital@0;1&display=swap"
+            rel="stylesheet"
+        />
+        <script src="./index.js"></script>
+    </head>
+    <body>
+        <main>
+            <div class="above-game">
+                <button onClick="window.location.reload();">New Game</button>
+            </div>
+            <div id="board">
+                <div id="00"></div>
+                <div id="01"></div>
+                <div id="02"></div>
+                <div id="03"></div>
 
-        <div id="10"></div>
-        <div id="11"></div>
-        <div id="12"></div>
-        <div id="13"></div>
+                <div id="10"></div>
+                <div id="11"></div>
+                <div id="12"></div>
+                <div id="13"></div>
 
-        <div id="20"></div>
-        <div id="21"></div>
-        <div id="22"></div>
-        <div id="23"></div>
+                <div id="20"></div>
+                <div id="21"></div>
+                <div id="22"></div>
+                <div id="23"></div>
 
-        <div id="30"></div>
-        <div id="31"></div>
-        <div id="32"></div>
-        <div id="33"></div>
-      </div>
-    </main>
-    <script>
-      const SIZE = 4
+                <div id="30"></div>
+                <div id="31"></div>
+                <div id="32"></div>
+                <div id="33"></div>
+            </div>
+            <dialog>
+                <p>The End of the Game!</p>
+                <button autofocus>Close</button>
+            </dialog>
+        </main>
+        <script>
+            const SIZE = 4;
+            
+            const dialog = document.querySelector("dialog");
+            const closeButton = document.querySelector("dialog button");
+            closeButton.addEventListener("click", () => {
+              dialog.close();
+            });
 
-      const eventMap = {
-        ArrowLeft: API.left,
-        ArrowRight: API.right,
-        ArrowUp: API.up,
-        ArrowDown: API.down,
-      }
+            const eventMap = {
+                ArrowLeft: API.left,
+                ArrowRight: API.right,
+                ArrowUp: API.up,
+                ArrowDown: API.down,
+            };
 
-      window.state = API.init(SIZE)
+            window.state = API.init(SIZE);
 
-      function render(state) {
-        for (let i = 0; i < SIZE; i++) {
-          for (let j = 0; j < SIZE; j++) {
-            const id = i.toString() + j.toString()
+            function render(state) {
+                for (let i = 0; i < SIZE; i++) {
+                    for (let j = 0; j < SIZE; j++) {
+                        const id = i.toString() + j.toString();
 
-            const el = document.getElementById(id)
-            const val = state[i][j]
-            el.textContent = val === 0 ? '' : val
-            el.setAttribute('data-value', val)
-          }
-        }
-      }
-
-      function checkEvent(xss, fn) {
-        return !API.sameMatrixes(fn(xss), xss)
-      }
-
-      function checkEndGame(event, key1, key2, fn) {
-        if (event.key === key1 || event.key === key2) {
-          if (!checkEvent(window.state, fn)) {
-            alert('End Game')
-          }
-        }
-      }
-
-      document.addEventListener('keyup', event => {
-        const handler = eventMap[event.key]
-
-        if (handler) {
-          const newState = handler(window.state)
-          const sameMatrixes = API.sameMatrixes(newState, window.state)
-
-          if (emptyCoordinates(newState)?.length === 0 && sameMatrixes) {
-            // We suspect this is the end of game
-            checkEndGame(event, 'ArrowLeft', 'ArrowRight', API.up)
-            checkEndGame(event, 'ArrowUp', 'ArrowDown', API.right)
-          } else if (!sameMatrixes) {
-            const res = API.addRandom(newState)
-            if (!res) {
-              alert('End Game')
+                        const el = document.getElementById(id);
+                        const val = state[i][j];
+                        el.textContent = val === 0 ? "" : val;
+                        el.setAttribute("data-value", val);
+                    }
+                }
             }
-            window.state = res
-          }
 
-          render(window.state)
-        }
-      })
+            function checkEvent(xss, fn) {
+                return !API.sameMatrixes(fn(xss), xss);
+            }
 
-      render(window.state)
-    </script>
-  </body>
+            function checkEndGame(event, key1, key2, fn) {
+                if (event.key === key1 || event.key === key2) {
+                    if (!checkEvent(window.state, fn)) {
+                        dialog.showModal();
+                    }
+                }
+            }
+
+            document.addEventListener("keyup", (event) => {
+                const handler = eventMap[event.key];
+
+                if (handler) {
+                    const newState = handler(window.state);
+                    const sameMatrixes = API.sameMatrixes(
+                        newState,
+                        window.state
+                    );
+
+                    if (
+                        emptyCoordinates(newState)?.length === 0 &&
+                        sameMatrixes
+                    ) {
+                        // We suspect this is the end of game
+                        checkEndGame(event, "ArrowLeft", "ArrowRight", API.up);
+                        checkEndGame(event, "ArrowUp", "ArrowDown", API.right);
+                    } else if (!sameMatrixes) {
+                        const res = API.addRandom(newState);
+                        if (!res) {
+                            dialog.showModal();
+                        }
+                        window.state = res;
+                    }
+
+                    render(window.state);
+                }
+            });
+
+            render(window.state);
+        </script>
+    </body>
 </html>
