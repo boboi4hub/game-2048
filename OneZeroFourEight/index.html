@@ -45,18 +45,18 @@
                 <div id="32"></div>
                 <div id="33"></div>
             </div>
-            <dialog>
+            <dialog id="gameEndDialog" class="unselectable">
                 <p>The End of the Game!</p>
-                <button autofocus>Close</button>
+                <button id="closeButton">Close</button>
             </dialog>
         </main>
         <script>
             const SIZE = 4;
-            
+
             const dialog = document.querySelector("dialog");
             const closeButton = document.querySelector("dialog button");
             closeButton.addEventListener("click", () => {
-              dialog.close();
+                dialog.close();
             });
 
             const eventMap = {
@@ -113,6 +113,7 @@
                     } else if (!sameMatrixes) {
                         const res = API.addRandom(newState);
                         if (!res) {
+                            closeButton.blur();
                             dialog.showModal();
                         }
                         window.state = res;

@@ -51,13 +51,40 @@ button {
 button:hover {
     background-color: rgb(130, 87, 87, 30%);
 }
-/* Dialog desigh */
-::backdrop {
-  background-color: rgb(0, 0, 0);
-  opacity: 0.5;
+
+.unselectable {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+  user-select: none; /* Standard */
 }
 
+/* Dialog desigh */
 
+::backdrop {
+    background-color: rgb(0, 0, 0);
+    opacity: 0.5;
+}
+
+#gameEndDialog {
+    font-size: 3.5vw;
+    font-weight: 800;
+    padding: 0.5rem;
+    width: 40vw;
+    height: 20vw;
+    align-content: center;
+    font-family: "Rubik", sans-serif;
+    background: white;
+    border-radius: 0.25rem;
+    border: none;
+}
+
+#gameEndDialog #closeButton {
+    width: 18vw;
+    height: 6vw;
+    font-size: 2vw;
+    border: none;
+}
 /* Cell Colors */
 
 div[data-value] {
