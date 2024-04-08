@@ -53,10 +53,10 @@ button:hover {
 }
 
 .unselectable {
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE/Edge */
-  user-select: none; /* Standard */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+    user-select: none; /* Standard */
 }
 
 /* Dialog desigh */
@@ -77,7 +77,10 @@ button:hover {
     background: white;
     border-radius: 0.25rem;
     border: none;
+    opacity: 0%;
+    transition:opacity, 3s;
 }
+
 
 #gameEndDialog #closeButton {
     width: 18vw;

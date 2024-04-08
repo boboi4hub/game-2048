@@ -57,6 +57,7 @@
             const closeButton = document.querySelector("dialog button");
             closeButton.addEventListener("click", () => {
                 dialog.close();
+                changeOpacityZero();
             });
 
             const eventMap = {
@@ -88,7 +89,7 @@
             function checkEndGame(event, key1, key2, fn) {
                 if (event.key === key1 || event.key === key2) {
                     if (!checkEvent(window.state, fn)) {
-                        dialog.showModal();
+                      showDialogTransition()  
                     }
                 }
             }
@@ -113,8 +114,7 @@
                     } else if (!sameMatrixes) {
                         const res = API.addRandom(newState);
                         if (!res) {
-                            closeButton.blur();
-                            dialog.showModal();
+                          showDialogTransition()
                         }
                         window.state = res;
                     }
