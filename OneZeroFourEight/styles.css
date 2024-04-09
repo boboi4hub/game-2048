@@ -1,168 +1,170 @@
 /* Preset Styles */
 
+html {
+  font-family: 'Rubik', sans-serif;
+}
+
+body {
+  text-align: center;
+  touch-action:none;
+}
+
 main {
-    margin: 0 auto;
-    width: 400px;
-    height: 400px;
+  margin: 0 auto;
+  width: 400px;
+  height: 400px;
 }
 
 #board {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-gap: 3px;
-    font-family: "Rubik", sans-serif;
-    font-weight: 700;
-    cursor: default;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 3px;
+  font-weight: 700;
+  cursor: default;
 }
 
 #board div {
-    width: 100px;
-    height: 100px;
-    border-radius: 3px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
+  width: 100px;
+  height: 100px;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
 }
 
 /* Main styles */
 
-body {
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 .above-game {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 button {
-    width: 150px;
-    height: 50px;
-    cursor: pointer;
-    font-family: "Rubik", sans-serif;
-    font-weight: 700;
-    border-radius: 4px;
-    background-color: rgb(130, 87, 87, 10%);
-    align-items: end;
-    font-size: 1.3rem;
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  border-radius: 4px;
+  background-color: rgb(130, 87, 87, 10%);
+  align-items: end;
+  font-size: 1.3rem;
 }
 
 button:hover {
-    background-color: rgb(130, 87, 87, 30%);
+  background-color: rgb(130, 87, 87, 30%);
 }
 
 .unselectable {
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE/Edge */
-    user-select: none; /* Standard */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE/Edge */
+  user-select: none; /* Standard */
 }
 
 /* Dialog desigh */
 
 ::backdrop {
-    background-color: rgb(0, 0, 0);
-    opacity: 0.5;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.5;
 }
 
 #gameEndDialog {
-    font-size: 3.5vw;
-    font-weight: 800;
-    padding: 0.5rem;
-    width: 40vw;
-    height: 20vw;
-    align-content: center;
-    font-family: "Rubik", sans-serif;
-    background: white;
-    border-radius: 0.25rem;
-    border: none;
-    opacity: 0%;
-    transition:opacity, 3s;
+  font-size: 3.5vw;
+  font-weight: 800;
+  padding: 0.5rem;
+  width: 40vw;
+  height: 20vw;
+  align-content: center;
+  font-family: 'Rubik', sans-serif;
+  background: white;
+  border-radius: 0.25rem;
+  border: none;
+  opacity: 0%;
+  transition: opacity, 3s;
 }
 
-
 #gameEndDialog #closeButton {
-    width: 18vw;
-    height: 6vw;
-    font-size: 2vw;
-    border: none;
+  width: 18vw;
+  height: 6vw;
+  font-size: 2vw;
+  border: none;
 }
 /* Cell Colors */
 
 div[data-value] {
-    background-color: #ff2020;
-    margin: auto;
-    width: min-content;
-    border-color: darkred;
-    border: 15px;
+  background-color: #ff2020;
+  margin: auto;
+  width: min-content;
+  border-color: darkred;
+  border: 15px;
 }
 
-div[data-value="0"] {
-    background-color: rgb(130, 87, 87, 10%);
+div[data-value='0'] {
+  background-color: rgb(130, 87, 87, 10%);
 }
 
-div[data-value="2"] {
-    background-color: #eee4da;
-    color: #727371;
+div[data-value='2'] {
+  background-color: #eee4da;
+  color: #727371;
 }
 
-div[data-value="4"] {
-    background-color: #ece0ca;
-    color: #727371;
+div[data-value='4'] {
+  background-color: #ece0ca;
+  color: #727371;
 }
 
-div[data-value="8"] {
-    background-color: #f4b17a;
-    color: white;
+div[data-value='8'] {
+  background-color: #f4b17a;
+  color: white;
 }
 
-div[data-value="16"] {
-    background-color: #f59575;
-    color: white;
+div[data-value='16'] {
+  background-color: #f59575;
+  color: white;
 }
 
-div[data-value="32"] {
-    background-color: #f57c5f;
-    color: white;
+div[data-value='32'] {
+  background-color: #f57c5f;
+  color: white;
 }
 
-div[data-value="64"] {
-    background-color: #f65d3b;
-    color: white;
+div[data-value='64'] {
+  background-color: #f65d3b;
+  color: white;
 }
 
-div[data-value="128"] {
-    background-color: #edce71;
-    color: white;
+div[data-value='128'] {
+  background-color: #edce71;
+  color: white;
 }
 
-div[data-value="256"] {
-    background-color: #edcc63;
-    color: white;
+div[data-value='256'] {
+  background-color: #edcc63;
+  color: white;
 }
 
-div[data-value="512"] {
-    background-color: #edc651;
-    color: white;
+div[data-value='512'] {
+  background-color: #edc651;
+  color: white;
 }
 
-div[data-value="1024"] {
-    background-color: #eec744;
-    color: white;
+div[data-value='1024'] {
+  background-color: #eec744;
+  color: white;
 }
 
-div[data-value="2048"] {
-    background-color: #ecc230;
-    color: white;
+div[data-value='2048'] {
+  background-color: #ecc230;
+  color: white;
 }
 
-div[data-value="4096"] {
-    background-color: #fe3d3d;
-    color: white;
+div[data-value='4096'] {
+  background-color: #fe3d3d;
+  color: white;
 }
 
-div[data-value="8192"] {
-    background-color: #ff2020;
-    color: white;
+div[data-value='8192'] {
+  background-color: #ff2020;
+  color: white;
 }
