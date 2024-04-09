@@ -17,9 +17,21 @@ body {
 }
 
 .score {
-  color: #727371;
-  font-weight: 700;
-  text-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.score div {
+  margin-bottom: 5px;
+}
+
+#scoreValue {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff5722; /* Orange color for score */
 }
 
 main {
