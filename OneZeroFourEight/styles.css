@@ -6,13 +6,11 @@ html {
 
 body {
   text-align: center;
-  touch-action:none;
+  touch-action: none;
 }
 
 main {
   margin: 0 auto;
-  width: 400px;
-  height: 400px;
 }
 
 #board {
@@ -24,16 +22,14 @@ main {
 }
 
 #board div {
-  width: 100px;
-  height: 100px;
+  width: 23.5vw;
+  height: 23.5vw;
   border-radius: 3px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2em;
 }
-
-/* Main styles */
 
 .above-game {
   margin-bottom: 1.5rem;
@@ -43,7 +39,28 @@ button {
   width: 150px;
   height: 50px;
   cursor: pointer;
-  font-family: 'Rubik', sans-serif;
+  font-weight: 700;
+  border-radius: 25px; /* Increase border radius for a smoother look */
+  background-color: rgb(130, 87, 87, 10%);
+  font-size: 1.3rem;
+  border: 2px solid #684848; /* Add a border */
+  color: #727371; /* Text color */
+  text-transform: uppercase; /* Uppercase text */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+/* Hover effect */
+button:hover {
+  background-color: rgb(130, 87, 87, 30%);
+  color: #eee; /* Lighter text color on hover */
+}
+
+/* Old button */
+/* button {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
   font-weight: 700;
   border-radius: 4px;
   background-color: rgb(130, 87, 87, 10%);
@@ -53,7 +70,22 @@ button {
 
 button:hover {
   background-color: rgb(130, 87, 87, 30%);
+} */
+
+@media screen and (min-width: 429px) {
+  main {
+    margin: 0 auto;
+    width: 400px;
+    height: 400px;
+  }
+
+  #board div {
+    width: 100px;
+    height: 100px;
+  }
 }
+
+
 
 .unselectable {
   -webkit-user-select: none; /* Safari */
