@@ -5,8 +5,21 @@ html {
 }
 
 body {
-  text-align: center;
   touch-action: none;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.score {
+  color: #727371;
+  font-weight: 700;
+  text-align: start;
 }
 
 main {
@@ -29,10 +42,6 @@ main {
   justify-content: center;
   align-items: center;
   font-size: 2em;
-}
-
-.above-game {
-  margin-bottom: 1.5rem;
 }
 
 button {
@@ -84,8 +93,6 @@ button:hover {
     height: 100px;
   }
 }
-
-
 
 .unselectable {
   -webkit-user-select: none; /* Safari */
