@@ -55,13 +55,6 @@
     <script>
       const SIZE = 4
 
-      const dialog = document.querySelector('dialog')
-      const closeButton = document.querySelector('dialog button')
-      closeButton.addEventListener('click', () => {
-        dialog.close()
-        changeOpacityZero()
-      })
-
       const eventMap = {
         ArrowLeft: API.left,
         ArrowRight: API.right,
@@ -73,6 +66,25 @@
         position: API.init(SIZE),
         score: 0,
       }
+
+      const dialog = document.querySelector('dialog')
+
+      function changeOpacity(value) {
+        dialog.style.opacity = value // Change opacity to 50%
+      }
+
+      /// Show the dialog after a delay
+      function showDialogTransition() {
+        dialog.showModal()
+        changeOpacity('1')
+      }
+
+      const closeButton = document.querySelector('dialog button')
+
+      closeButton.addEventListener('click', () => {
+        dialog.close()
+        changeOpacity('0')
+      })
 
       function render(state) {
         for (let i = 0; i < SIZE; i++) {
