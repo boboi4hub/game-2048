@@ -68,6 +68,7 @@
       }
 
       const dialog = document.querySelector('dialog')
+      const scoreValue = document.getElementById('scoreValue')
 
       function changeOpacity(value) {
         dialog.style.opacity = value // Change opacity to 50%
@@ -97,6 +98,8 @@
             el.setAttribute('data-value', val)
           }
         }
+
+        scoreValue.innerHTML = state.score
       }
 
       function checkEvent(xss, fn) {
@@ -113,7 +116,8 @@
 
       function processMove(handler, eventKey) {
         if (handler) {
-          const newState = handler(window.state.position)
+          const [newState, points] = handler(window.state.position)
+          window.state.score += points
           const sameMatrixes = API.sameMatrixes(newState, window.state.position)
 
           if (emptyCoordinates(newState)?.length === 0 && sameMatrixes) {

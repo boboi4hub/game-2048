@@ -9,25 +9,33 @@ function mergeTwoElements(x1, x2) {
 function mergeArray(xs) {
   const filtered = xs.filter(n => n != 0)
   const result = []
+  let points = 0
 
   for (let i = 0; i < filtered.length; i++) {
-    const m = mergeTwoElements(filtered[i], filtered[i + 1])
+    const [left, right] = [filtered[i], filtered[i + 1]]
+    const m = mergeTwoElements(left, right)
     result.push(m)
-    if (m !== filtered[i]) {
+    if (m !== left) {
       i++
+    }
+    if (left === right) {
+      points += left * 2
     }
   }
 
-  return [...result, ...[0, 0, 0, 0]].slice(0, xs.length)
+  return [[...result, ...[0, 0, 0, 0]].slice(0, xs.length), points]
 }
 
 /// Merge all the matrix
 function mergeMatrix(xss) {
   const result = []
+  let points = 0
   for (const element of xss) {
-    result.push(mergeArray(element))
+    let [r, p] = mergeArray(element)
+    points += p
+    result.push(r)
   }
-  return result
+  return [result, points]
 }
 
 function copyMatrix(matrix) {
@@ -99,27 +107,28 @@ const API = {
   /// Key Handler
   up: xss => {
     const r = rotateMatrixRight(rotateMatrixRight(rotateMatrixRight(xss)))
-    const result = mergeMatrix(r)
-    return rotateMatrixRight(result)
+    const [rs, pt] = mergeMatrix(r)
+    return [rotateMatrixRight(rs), pt]
   },
 
   /// Key Handler
   down: xss => {
     const r = rotateMatrixRight(xss)
-    const result = mergeMatrix(r)
-    return rotateMatrixRight(rotateMatrixRight(rotateMatrixRight(result)))
+    const [rs, pt] = mergeMatrix(r)
+    return [rotateMatrixRight(rotateMatrixRight(rotateMatrixRight(rs))), pt]
   },
 
   /// Key  Handler
   left: xss => {
-    return mergeMatrix(xss)
+    const [rs, pt] = mergeMatrix(xss)
+    return [rs, pt]
   },
 
   /// Key  Handler
   right: xss => {
     const r = rotateMatrixRight(rotateMatrixRight(xss))
-    const result = mergeMatrix(r)
-    return rotateMatrixRight(rotateMatrixRight(result))
+    const [rs, pt] = mergeMatrix(r)
+    return [rotateMatrixRight(rotateMatrixRight(rs)), pt]
   },
 
   /// Game Initialization

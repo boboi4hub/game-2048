@@ -24,7 +24,6 @@ function mergeArray(xs) {
 function mergeMatrix(xss) {
     const result = [];
     for (let i = 0; i < xss.length; i++) {
-        //    console.log(mergeArray (xss[i]))
         result.push(mergeArray(xss[i]));
     }
     return result;
