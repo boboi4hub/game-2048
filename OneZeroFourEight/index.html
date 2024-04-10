@@ -46,6 +46,7 @@
         <div id="32"></div>
         <div id="33"></div>
       </div>
+
       <dialog id="gameEndDialog" class="unselectable">
         <p>The End of the Game!</p>
         <button id="closeButton">Close</button>
@@ -68,7 +69,10 @@
         ArrowDown: API.down,
       }
 
-      window.state = API.init(SIZE)
+      window.state = {
+        position: API.init(SIZE),
+        score: 0,
+      }
 
       function render(state) {
         for (let i = 0; i < SIZE; i++) {
@@ -76,7 +80,7 @@
             const id = i.toString() + j.toString()
 
             const el = document.getElementById(id)
-            const val = state[i][j]
+            const val = state.position[i][j]
             el.textContent = val === 0 ? '' : val
             el.setAttribute('data-value', val)
           }
@@ -89,18 +93,16 @@
 
       function checkEndGame(eventKey, key1, key2, fn) {
         if (eventKey === key1 || eventKey === key2) {
-          if (!checkEvent(window.state, fn)) {
+          if (!checkEvent(window.state.position, fn)) {
             showDialogTransition()
           }
         }
       }
 
       function processMove(handler, eventKey) {
-        console.log(handler, eventKey)
-
         if (handler) {
-          const newState = handler(window.state)
-          const sameMatrixes = API.sameMatrixes(newState, window.state)
+          const newState = handler(window.state.position)
+          const sameMatrixes = API.sameMatrixes(newState, window.state.position)
 
           if (emptyCoordinates(newState)?.length === 0 && sameMatrixes) {
             // We suspect this is the end of game
@@ -111,7 +113,7 @@
             if (!res) {
               showDialogTransition()
             }
-            window.state = res
+            window.state.position = res
           }
 
           render(window.state)
