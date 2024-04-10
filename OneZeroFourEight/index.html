@@ -103,7 +103,8 @@
       }
 
       function checkEvent(xss, fn) {
-        return !API.sameMatrixes(fn(xss), xss)
+        const [rs, _] = fn(xss) 
+        return !API.sameMatrixes(rs, xss)
       }
 
       function checkEndGame(eventKey, key1, key2, fn) {
@@ -119,14 +120,18 @@
           const [newState, points] = handler(window.state.position)
           window.state.score += points
           const sameMatrixes = API.sameMatrixes(newState, window.state.position)
+          console.log(0, sameMatrixes)
 
           if (emptyCoordinates(newState)?.length === 0 && sameMatrixes) {
+            console.log(1)
             // We suspect this is the end of game
             checkEndGame(eventKey, 'ArrowLeft', 'ArrowRight', API.up)
             checkEndGame(eventKey, 'ArrowUp', 'ArrowDown', API.right)
           } else if (!sameMatrixes) {
+            console.log(2)
             const res = API.addRandom(newState)
             if (!res) {
+              console.log(3)
               showDialogTransition()
             }
             window.state.position = res
@@ -155,19 +160,23 @@
         const diffYAbs = Math.abs(diffY)
 
         let pair
-        if (diffXAbs > diffYAbs) {
-          pair =
-            diffX > 0
-              ? ['ArrowRight', eventMap.ArrowRight]
-              : ['ArrowLeft', eventMap.ArrowLeft]
-        } else {
-          pair =
-            diffY > 0
-              ? ['ArrowDown', eventMap.ArrowDown]
-              : ['ArrowUp', eventMap.ArrowUp]
+
+        if (diffXAbs > 50 || diffYAbs > 50) {
+          if (diffXAbs > diffYAbs) {
+            pair =
+              diffX > 0
+                ? ['ArrowRight', eventMap.ArrowRight]
+                : ['ArrowLeft', eventMap.ArrowLeft]
+          } else {
+            pair =
+              diffY > 0
+                ? ['ArrowDown', eventMap.ArrowDown]
+                : ['ArrowUp', eventMap.ArrowUp]
+          }
+
+          const [eventKey, handler] = pair
+          processMove(handler, eventKey)
         }
-        const [eventKey, handler] = pair
-        processMove(handler, eventKey)
       }
 
       let target = document.getElementById('board')
